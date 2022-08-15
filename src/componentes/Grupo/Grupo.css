@@ -9,3 +9,10 @@
     display: inline-block;
     padding-bottom: 8px;
 }
+
+.grupo .grupo-de-receitas{
+    display: flex;
+    margin-top: 32px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}

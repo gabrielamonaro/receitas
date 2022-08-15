@@ -15,12 +15,16 @@ const Formulario = (props) => {
 
     const aoSalvar = (evento) => {
         evento.preventDefault();
-        props.aoColaboradorCadastrado({
+        props.aReceitaCadastrada({
             nome: nome,
             receita: receita,
             imagem: imagem,
             grupo: grupo
         })
+        setNome('')
+        setReceita('')
+        setImagem('')
+        setGrupo('')
     }
 
     return (
@@ -30,7 +34,7 @@ const Formulario = (props) => {
                 <CampoTexto 
                     obrigatorio={true} 
                     label="Nome do prato" 
-                    placeholder="Digite o seu nome"
+                    placeholder="Digite o nome da receita"
                     valor = {nome}
                     aoAlterado = {valor => setNome(valor)}
                 />

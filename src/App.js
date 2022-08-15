@@ -2,6 +2,7 @@ import Banner from './componentes/Banner';
 import Formulario from './componentes/Formulario';
 import Grupo from './componentes/Grupo';
 import { useState } from 'react';
+import Rodape from './componentes/Rodape';
 
 function App() {
 
@@ -44,10 +45,9 @@ function App() {
   
 ]
   
-  const[colaboradores, setColaboradores] = useState([])
-  const aoNovoColaboradorAdicionado = (colaborador) => {
-    console.log(colaborador)
-    setColaboradores([...colaboradores, colaborador])
+  const[receitas, setReceitas] = useState([])
+  const aNovaReceitaAdicionada = (receita) => {
+  setReceitas([...receitas, receita])
   }
 
   return (
@@ -55,17 +55,19 @@ function App() {
       <Banner/>
       <Formulario
         nomeDosGrupos={grupos.map(grupo => grupo.nome)}
-        aoColaboradorCadastrado={colaborador => aoNovoColaboradorAdicionado(colaborador)}
+        aReceitaCadastrada={receita => aNovaReceitaAdicionada(receita)}
       />
 
       {grupos.map(grupo => <Grupo 
-      key={grupo.nome} 
-      nome={grupo.nome} 
-      corPrimaria={grupo.corPrimaria} 
-      corSecundaria = {grupo.corSecundaria} 
+        key={grupo.nome} 
+        nome={grupo.nome} 
+        corPrimaria={grupo.corPrimaria} 
+        corSecundaria = {grupo.corSecundaria} 
+        receitas={receitas.filter(receita => receita.grupo === grupo.nome)}
       />)}
-    
+      <Rodape/>
     </div>
+    
   );
 }
 
