@@ -3,7 +3,18 @@ import CampoTexto from '../CampoTexto'
 import ListaSuspensa from '../ListaSuspensa'
 import './Formulario.css'
 import { useState } from "react";
+
+// localStorage part
+ let itens = localStorage.getItem("itens") || []
+ if (itens.length !== 0) 
+ {
+    itens = JSON.parse(itens);
+ }
+// localStorage part
+
 const Formulario = (props) => {
+
+
 
 
     const [nome, setNome] = useState('') //pegando a primeira e segunda posição do array que é devolvido do useState()
@@ -21,6 +32,18 @@ const Formulario = (props) => {
             imagem: imagem,
             grupo: grupo
         })
+
+        // localStorage part
+        let item = {
+            nome: nome, 
+            receita: receita,
+            imagem: imagem,
+            grupo: grupo,
+        }
+         itens.push(item);
+         localStorage.setItem("itens", JSON.stringify(itens))
+        // localStorage part
+
         setNome('')
         setReceita('')
         setImagem('')
@@ -59,7 +82,12 @@ const Formulario = (props) => {
                     valor={grupo}
                     aoAlterado = {valor => setGrupo(valor)}
                 />
-                <Botao> Criar Card</Botao>
+                <div className='secao-botoes'>
+                    <Botao type="submit"> Criar Card</Botao>
+                    {props.children}
+
+                </div>
+                
             </form>
         </section>
     )

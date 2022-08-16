@@ -3,6 +3,10 @@ import Formulario from './componentes/Formulario';
 import Grupo from './componentes/Grupo';
 import { useState } from 'react';
 import Rodape from './componentes/Rodape';
+import Botao from './componentes/Botao';
+
+
+let listaAtualizada = false
 
 function App() {
 
@@ -44,19 +48,47 @@ function App() {
     },
   
 ]
-  
+
+//localStorage Part
+  let itens = localStorage.getItem("itens") || []
+ 
+//localStorage Part
+
   const[receitas, setReceitas] = useState([])
-  const aNovaReceitaAdicionada = (receita) => {
-  setReceitas([...receitas, receita])
+
+  function aNovaReceitaAdicionada (receita) {
+    setReceitas([...receitas, receita])
   }
+
+//localStorage Part
+    function atualizaCards(itens){
+      if (itens.length !== 0 && !listaAtualizada)
+      {
+        itens = (JSON.parse(itens))
+
+        for(let i=0; i<itens.length-1; i++)
+        {
+          receitas.push(itens[i])
+        }
+        itens.forEach(item => {
+          aNovaReceitaAdicionada(item)
+        });  
+        listaAtualizada = true
+      }
+    }
+//localStorage Part
 
   return (
     <div className="App">
-      <Banner/>
+      <Banner />
+      
       <Formulario
         nomeDosGrupos={grupos.map(grupo => grupo.nome)}
         aReceitaCadastrada={receita => aNovaReceitaAdicionada(receita)}
-      />
+      >
+        <Botao classe="resgate" funcao={() => atualizaCards(itens)}> Resgatar receitas </Botao>
+      </Formulario>
+      
 
       {grupos.map(grupo => <Grupo 
         key={grupo.nome} 
@@ -70,5 +102,7 @@ function App() {
     
   );
 }
+
+
 
 export default App;

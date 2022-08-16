@@ -8,8 +8,10 @@
     cursor: pointer;
     color: #FFF;
     margin: 32px 0;
+
 }
 
 .botao:hover{
     color: #6b9b21;
 }
+
