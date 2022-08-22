@@ -16,3 +16,15 @@
     display: flex;
     justify-content: space-between;
 }
+
+@media screen and (max-width: 768px) {
+    .formulario form{
+        max-width: 100%;   
+        width: 600px; 
+        padding: 15px 20px;
+    }
+
+    .formulario{
+        margin: 20px 0;
+    }
+}
